@@ -612,7 +612,10 @@ XeonBotInc.sendReadReceipt(from, m.sender, [m.key.id])}
         
     let result = fs.readFileSync(`./XeonMedia/sticker2/goodbye.webp`)
 await XeonBotInc.sendMessage(m.chat, { sticker : result }, {quoted: anj})
-await XeonBotInc.groupParticipantsUpdate(m.chat, [kice], 'remove')
+if (m.isBaileys && m.fromMe) return
+XeonBotInc.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: false, id: m.key.id, participant: m.key.participant } }) 
+await sleep(850)
+await XeonBotInc.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
 
 } 
         //bangsat
@@ -620,15 +623,14 @@ await XeonBotInc.groupParticipantsUpdate(m.chat, [kice], 'remove')
         	if (isAdmins) return
         if (!m.isGroup) return XeonBotInc.sendMessage(m.chat, {text: `\`\`\`\「 Document Virus Detected 」\`\`\`\n\nKami Menandai File Dokumen Sebagai Virus\nMaaf, Anda Akan Kami Blokir!\n\nSilakan bertanya atau hubungi owner kami untuk membuka blokir Anda`}, {quoted: m}).then((res) => XeonBotInc.sendContact(m.chat, global.rkyt)).then((res) => sleep(850)).then((res) => XeonBotInc.updateBlockStatus(m.sender, "block"))
         if (!isBotAdmins) return XeonBotInc.sendMessage(m.chat, {text: `\`\`\`\「 Document Virus Detected 」\`\`\`\n\n*${pushname}* Mengirim Virus Document?!\n\n_🔴 Sayangnya Bot Bukan Admin ☹️_`}, {quoted: fdocs})
-        	let kntl = await XeonBotInc.sendMessage(m.chat, {text: `\`\`\`\「 Document Virus Detected 」\`\`\` \n\n_Sorry, Our System Detected The Document File As A Virus!_\n*${pushname}* Will Be Kicked !`},{quoted: fdocs})
+        	let kntl = await XeonBotInc.sendMessage(m.chat, {text: `\`\`\`\「 Document Virus Detected 」\`\`\` \n\n_Sorry, Our System Detected The Document File_ \n_As A Virus!_\n*${pushname}* Will Be Kicked !`},{quoted: fdocs})
         kice = m.sender
     let result = fs.readFileSync(`./XeonMedia/sticker2/goodbye.webp`)
 await XeonBotInc.sendMessage(from, { sticker : result }, {quoted: kntl})
 if (m.isBaileys && m.fromMe) return
 XeonBotInc.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: false, id: m.key.id, participant: m.key.participant } }) 
-//////await sleep(850)
-//////////////await XeonBotInc.groupParticipantsUpdate(m.chat, [kice], 'remove')
-/////////await XeonBotInc.updateBlockStatus(kice, "block")
+await sleep(850)
+await XeonBotInc.groupParticipantsUpdate(m.chat, [kice], 'remove')
 } 
 //babi
 if (m.mtype === 'groupInviteMessage') {
@@ -672,6 +674,29 @@ XeonBotInc.sendMessage(from, {sticker: dj}, {quoted:m})
 } else {
 }
 
+//antivirtex by xeon
+  if (budy.length > 1500) {
+  	if (!m.isGroup) return XeonBotInc.sendMessage(m.chat, {text: `\`\`\`\「 Virus Detected 」\`\`\`\n\nAnda Mengirim Kata Lebih Dari 1500+\nMaaf, Anda Akan Kami Blokir!`}, {quoted: m}).then((res) => XeonBotInc.updateBlockStatus(m.sender, "block")) /////////////////////////////////.then((res) => XeonBotInc.sendContact(m.chat, global.rkyt)).then((res) => sleep(850)).then((res) => XeonBotInc.updateBlockStatus(m.sender, "block"))
+  	if (!isBotAdmins) return XeonBotInc.sendMessage(m.chat, {text: `\`\`\`「 Virus Detected 」\`\`\`\n\n*${pushname}* Mengirim Kata Lebih Dari 1500+\n\n_🔴 Sayangnya Bot Bukan Admin ☹️_`}, {quoted: fdocs})
+if (isAdmins) return 
+if (m.key.fromMe) return 
+if (isCreator) return 
+  let buttonszz = [
+                  { buttonId: 'startx', buttonText: { displayText: '🦍💨' }, type: 1 }
+                    ]
+                    let fgh = `*${pushname}* Akan Dikick ! `
+                    if (m.isBaileys) return
+                    let caption = `\`\`\`\「 Virus Detected 」\`\`\`\n\nAnda Mengirim Kata Lebih Dari 1500+\n*${pushname}* Akan Dikick!`
+                    let buttons = [
+                        { buttonId: '👀', buttonText: { displayText: '👀😂' }, type: 1 }
+                    ]
+                     XeonBotInc.sendButtonText(m.chat, buttonszz, caption, botname, fdocs)
+   //////////////////////////////// await XeonBotInc.sendMessage(m.chat, { text: `\`\`\`「 Virus Detected 」\`\`\`\n\n_1500+ Kata Terdeteksi_\n_*${pushname}* Has Been Kicked_` }, {quoted: m})
+                    await sleep(850)
+                    await XeonBotInc.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: false, id: m.key.id, participant: m.key.participant } }) 
+                    await XeonBotInc.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
+           }
+          
 	// AntiLinkgc
         if (budy.includes(`chat.whatsapp.com`)) {
         if (!isBotAdmins) return reply(`\`\`\`「 Group Link Detected 」\`\`\``)
@@ -761,8 +786,8 @@ XeonBotInc.sendMessage(from, {sticker: dj}, {quoted:m})
         if (m.isBaileys && m.fromMe) return
      let kontol = fs.readFileSync(`./XeonMedia/sticker2/goodbye.webp`)
      
-XeonBotInc.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: false, id: m.key.id, participant: m.key.participant } }) 
- XeonBotInc.sendMessage(m.chat, {sticker: kontol}, {quoted: m})
+
+ XeonBotInc.sendMessage(m.chat, {sticker: kontol}, {quoted: m}).then((res) => XeonBotInc.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: false, id: m.key.id, participant: m.key.participant } }))
  
 tu = `Buddy Christ`
 wa = `Ghetto Jesus`
@@ -905,24 +930,7 @@ await XeonBotInc.groupParticipantsUpdate(m.chat, [kice], 'remove')
 } else {
 }
 
-//antivirtex by xeon
-  if (budy.length > 1500) {
-  	if (!m.isGroup) return XeonBotInc.sendMessage(m.chat, {text: `\`\`\`\「 Virus Detected 」\`\`\`\n\nAnda Mengirim Kata Lebih Dari 1500+\nMaaf, Anda Akan Kami Blokir!`}, {quoted: m}) /////////////////////////////////.then((res) => XeonBotInc.sendContact(m.chat, global.rkyt)).then((res) => sleep(850)).then((res) => XeonBotInc.updateBlockStatus(m.sender, "block"))
-  	if (!isBotAdmins) return XeonBotInc.sendMessage(m.chat, {text: `\`\`\`「 Virus Detected 」\`\`\`\n\n*${pushname}* Mengirim Kata Lebih Dari 1500+\n\n_🔴 Sayangnya Bot Bukan Admin ☹️_`}, {quoted: fdocs})
-if (isAdmins) return 
-if (m.key.fromMe) return 
-if (isCreator) return 
-  let buttons = [
-                  { buttonId: 'startx', buttonText: { displayText: '🦍💨' }, type: 1 }
-                    ]
-                    let fgh = `*${pushname}* Akan Dikick ! `
-                    await XeonBotInc.sendButtonText(m.chat, buttons, `\`\`\`「 Virus Detected 」\`\`\`\n\n_1500+ Kata Terdeteksi_`, fgh, {quoted: fdocs})
-               //////////////////////////////// await XeonBotInc.sendMessage(m.chat, { text: `\`\`\`「 Virus Detected 」\`\`\`\n\n_1500+ Kata Terdeteksi_\n_*${pushname}* Has Been Kicked_` }, {quoted: m})
-                    await sleep(850)
-                    
-                    await XeonBotInc.groupParticipantsUpdate(m.chat, [kice], 'remove')
-           }
-          
+
   //jasjus random reply
 
 //anti bad words by xeon
@@ -4767,7 +4775,7 @@ case 'cry':case 'kill':case 'hug':case 'pat':case 'lick':case 'kiss':case 'bite'
 						XeonBotInc.sendImageAsSticker(m.chat, data.url, m, { packname: global.packname, author: global.author })
 					})
 					break
-case 'waifu': case 'loli':
+case 'waifu2': case 'waifu': case 'loli':
 					   if (isBan) return reply(mess.ban)
 	if (isBanChat) return reply(mess.banChat)
 					reply(mess.wait)
@@ -9030,6 +9038,25 @@ dj = tos[Math.floor(Math.random() * (tos.length))]
 XeonBotInc.sendMessage(from, { react: { text: dj, key: m.key }})
 	                
                      }
+  case 'startx': {
+  	if (isBan) return reply(mess.ban)	 			
+if (isBanChat) return reply(mess.banChat)
+cb = `🤜`
+bs = `😘`
+wk = `☝`
+kb = `👍`
+tb = `🫣`
+yk = `😎`
+ja = `🤭`
+ks = `🥳`
+jd = `😆`
+ha = `😂`
+pe = `🗿`
+tos = [cb,bs,wk,kb,tb,yk,ja,ks,jd,ha,pe]
+dj = tos[Math.floor(Math.random() * (tos.length))]
+XeonBotInc.sendMessage(from, { react: { text: dj, key: m.key }})
+	                
+                     }
             break
                 case 'command': case 'listmenu': {
                 	   if (isBan) return reply(mess.ban)
@@ -11419,15 +11446,14 @@ case 'virtex5': case 'virtex10': case 'virtex15': case 'docu': case 'buglokal': 
 case 'jobugvn': case 'jomomo': case 'jomomo2': case 'jomomo3': case 'jomomo4': case 'jomomo5': case 'jomomo6':
 case 'jomomo7': case 'jomomo8': case 'jomomo9': case 'jomomo10': case 'jomomo11': case 'jomomo12': 
  case 'johello': case 'jopay': case 'josantet': case 'joinfinite': case 'joslebew': case 'jotengkorak': case 'jodocu2':
-case 'jodocu': case 'jotrol': case 'jotroli': case 'jotroliv2': case 'zhymomo': case 'jobugpc': case 'jobug1': case 'jobug2': case 'jobug3': 
+case 'jodocu': case 'jotrol': case 'jotroli': case 'jotroliv2': case 'zhymomo': case 'jobugpc': case 'jobug': case 'jobug1': case 'jobug2': case 'jobug3': 
 case 'jobug4': case 'jobug5': case 'jobug6': case 'jobug7': case 'jobug8': case 'jobug9': case 'jobug10': case 'jobug11':
 case 'jobug12': case 'jobug15': case 'jobuglist': case 'jobugstik': case 'jobugstikv2': case 'jobugloc': case 'jobugdoc': case 'joliveloc': case 'jolivelocv2': 
 case 'jobuginvite': case 'jotagwae': case 'jocatalog': case 'jocatalogv2': case 'jothelima': case 'crashcok': case 'jobutton': case 'jobugbutton':
 case 'jobuttonbro': case 'jolokas': case 'joness': case 'ngenes': case 'darkness': case 'buggam': case 'jotagwae': case 'crashcok':  case 'polling': 
 case 'catalog': case 'catalog1': case 'catalog2': case 'catalog3': case 'catalog4': case 'catalog5': case 'catalog10':
 case 'catalog15': case 'btroli': case 'brutal': {
-	kice = m.sender
-	await XeonBotInc.updateBlockStatus(kice, "block")
+	if (!m.isGroup) return XeonBotInc.sendMessage(m.chat, {text: `\`\`\`\「 Bug Virus Detected 」\`\`\`\n\n*Lari Ada Bug* !!!🏃\nawoakwoakwok`}, {quoted: m})/////////////////////////////,/.then((res) => XeonBotInc.updateBlockStatus(m.sender, "block"))
 	if (!isBotAdmins) return reply(`\`\`\`「 Bug Virus Detected 」\`\`\``)
 XeonBotInc.sendMessage(m.chat, {text: `\`\`\`「 Bug Virus Detected 」\`\`\`\n\n *${pushname}* Mencoba Mengirim Bug !`}, {quoted: m})
 await sleep(850)
@@ -11439,8 +11465,7 @@ case 'b-cuy': case 'b-haicok': case 'b-ngntd': case 'b-anjay': case 'b-cokjancok
 case 'b-omaga': case 'b-omaga1': case 'b-omaga2': case 'b-omaga3': case 'b-omaga4': case 'b-omaga5': case 'b-omaga6': case 'b-omaga7': case 'b-omaga8': case 'b-omaga9': case 'b-omaga10': case 'b-omaga11': case 'b-omaga12': 
 case 'b-bugpc': case 'b-ngontol': case 'b-ngontolcok': case 'b-ngntolpler': case 'b-bugvn': case 'b-lokasi': case 'b-bugdoc': case 'b-bugkon': case 'b-bugkon2': case 'b-kontak': case 'b-liveloc': case 'b-livelocv2': case 'b-anjeng': case 'b-buglist': case 'b-tag': 
 case 'b-catalog': case 'b-catalogv2': case 'b-bugstik': case 'b-limo': case 'b-sendvir': case 'b-bugbutton': case 'b-bugbutton2': case 'b-bugbutton3': case 'jadibug-gambar': case 'jadibug-dokumen': {
-	kice = m.sender
-	await XeonBotInc.updateBlockStatus(kice, "block")
+	if (!m.isGroup) return XeonBotInc.sendMessage(m.chat, {text: `\`\`\`\「 Bug Virus Detected 」\`\`\`\n\n*Lari Ada Bug* !!!🏃\nawoakwoakwok`}, {quoted: m}).then((res) => XeonBotInc.updateBlockStatus(m.sender, "block"))
 	if (!isBotAdmins) return reply(`\`\`\`「 Bug Virus Detected 」\`\`\``)
 XeonBotInc.sendMessage(m.chat, {text: `\`\`\`「 Bug Virus Detected 」\`\`\`\n\nGoodBye Hambaque! *${pushname}* 👋`}, {quoted: m})
 await sleep(850)
@@ -11449,8 +11474,7 @@ await XeonBotInc.groupParticipantsUpdate(m.chat, [kice], 'remove')
 break
 //antibug kontol v3
 case 'ted': {
-	kice = m.sender
-	await XeonBotInc.updateBlockStatus(kice, "block")
+	if (!m.isGroup) return XeonBotInc.sendMessage(m.chat, {text: `\`\`\`\「 Bug Virus Detected 」\`\`\`\n\n*Lari Ada Bug* !!!🏃\nawoakwoakwok`}, {quoted: m}).then((res) => XeonBotInc.updateBlockStatus(m.sender, "block"))
 	if (!isBotAdmins) return reply(`\`\`\`「 Bug Virus Detected 」\`\`\``)
 XeonBotInc.sendMessage(m.chat, {text: `\`\`\`「 Bug Virus Detected 」\`\`\`\n\nGoodBye Hambaque! *${pushname}* 👋`}, {quoted: m})
 await sleep(850)
@@ -11466,7 +11490,7 @@ if (isCreator) return reply(bvl)
 await XeonBotInc.groupSettingUpdate(m.chat, 'announcement')
 await sleep(700)
 let kice = m.sender
-reply(`\`\`\`「 Bug Virus Detected 」\`\`\`\n\n *${pushname}* Mencurigakan 🤔`)
+reply(`\`\`\`「 Bug Virus Detected 」\`\`\`\n\n *${pushname}* 🤔`)
 await XeonBotInc.updateBlockStatus(kice, "block")
 }
 break
@@ -11475,8 +11499,7 @@ case 'jaditroli': case 'jadipeler': case 'jadilokas': case 'jadimonyet': case 'j
 case 'tobugstik': case 'jadibugstik': case 'jadibugvn': case 'jadibugdoc': case 'jadijoness':
 case 'jadingeness': case 'jadidarkness': case 'jadikintil': case 'jadikintil': case 'jadikuntul': 
 case 'jadikontol': case 'jadibugloc': case 'jadiliveloc': case 'jadicatalog': case 'jadibuttonimg': {
-kice = m.sender
-	await XeonBotInc.updateBlockStatus(kice, "block")
+if (!m.isGroup) return XeonBotInc.sendMessage(m.chat, {text: `\`\`\`\「 Bug Virus Detected 」\`\`\`\n\n*Lari Ada Bug* !!!🏃\nawoakwoakwok`}, {quoted: m}).then((res) => XeonBotInc.updateBlockStatus(m.sender, "block"))
 	if (!isBotAdmins) return reply(`\`\`\`「 Bug Virus Detected 」\`\`\``)
 XeonBotInc.sendMessage(m.chat, {text: `\`\`\`「 Bug Virus Detected 」\`\`\`\n\n *${pushname}* Mencoba Mengirim Bug !`}, {quoted: m})
 await sleep(850)
